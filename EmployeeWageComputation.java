@@ -1,11 +1,8 @@
+import java.util.Scanner;
 public class EmployeeWageComputation {
 	public static final int IS_FULL_TIME=1;
         public static final int IS_PART_TIME=2;
-        public static final int WAGE_PER_HR=20;
-	public static final int MAX_WORKING_DAYS=20;
-	public static final int MAX_WORKING_HOURS=100;
-
-	public static void EmployeeWageComputation() {
+	public static void EmployeeWageComputation(String company,int WAGE_PER_HR, int MAX_WORKING_DAYS,int MAX_WORKING_HOURS) {
 		 int empHr=0;
          	 int empWage=0;
 	         int totalWage=0;
@@ -38,6 +35,15 @@ public class EmployeeWageComputation {
 
 	public static void main(String[] args){
 		System.out.println("This is Employee Wage Computation problem");
-		EmployeeWageComputation();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter Company name: ");
+		String company = scan.next();
+		System.out.println("Enter Wage per hour: ");
+		int WAGE_PER_HR = scan.nextInt();
+		System.out .println("Enter Maximum working days in month: ");
+		int MAX_WORKING_DAYS = scan.nextInt();
+		System.out.println("Enter maximum working hours in month: ");
+		int MAX_WORKING_HOURS = scan.nextInt();
+		EmployeeWageComputation(company,WAGE_PER_HR,MAX_WORKING_DAYS,MAX_WORKING_HOURS);
 	}
 }
