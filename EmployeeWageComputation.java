@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap
 interface EmployeeWage {
 
 	void addCompanyEmpWage(String company ,int wagePerHour,int workingDays,int workingHours);
@@ -10,9 +13,11 @@ public class EmployeeWageComputation implements EmployeeWage {
 	public static final int IS_PART_TIME = 1;
 	public static final int IS_FULL_TIME = 2;
 	private ArrayList<CompanyEmpWage> companies;
+	private Map<String,Integer> companyWages;
 
 	public EmployeeWageComputation() {
 		companies = new ArrayList<CompanyEmpWage>();
+		companyWages = new HashMap<String,Integer>();
 	}
 
 	public void addCompanyEmpWage(String company ,int wagePerHour,int workingDays,int workingHours){
@@ -24,8 +29,9 @@ public class EmployeeWageComputation implements EmployeeWage {
                      CompanyEmpWage company = companies.get(i);
                      int totalWage = computeEmpWage(company);
                      company.setTotalEmpWage(totalWage);
-                     System.out.println(company);
+                     companyWages.put(company.getName(),totalWage);
                 }
+		System.out.println("Sorted values in Map --->" +companyWages.toString());
 	}
 	//Calculating monthly wage of employee
 	private int computeEmpWage(CompanyEmpWage companyEmpWage){
@@ -58,4 +64,3 @@ public class EmployeeWageComputation implements EmployeeWage {
 		empWage.computeEmpWage();
 	}
 }
-
