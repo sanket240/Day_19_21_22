@@ -2,48 +2,57 @@ import java.util.Scanner;
 public class EmployeeWageComputation {
 	public static final int IS_FULL_TIME=1;
         public static final int IS_PART_TIME=2;
-	public static void EmployeeWageComputation(String company,int WAGE_PER_HR, int MAX_WORKING_DAYS,int MAX_WORKING_HOURS) {
-		 int empHr=0;
-         	 int empWage=0;
-	         int totalWage=0;
-        	 int totalHours=0;
-	         int totalWorkingDays=0;
-        	 while (totalHours <= MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
-                	totalWorkingDays++;
-	                int empCheck = (int) Math.floor(Math.random() * 10) % 3;
-        	        switch (empCheck) {
-                	        case IS_FULL_TIME:
-                                System.out.println("Employee is Present");
-                                empHr=8;
-                                break;
-                        	case IS_PART_TIME:
-                                System.out.println("Employee present part-time");
-                                empHr=4;
-                                break;
-	                        default:
-                                System.out.println("Employee is Absent");
-                                empHr=0;
-                        }
-        	        totalHours += empHr;
-                	System.out.println("Day: "+totalWorkingDays + " Employee Hrs: "+empHr);
+	private String company;
+	private int wagePerHour;
+	private int workingDays;
+	private int workingHours;
+	private int totalEmpWage;
+
+	public EmployeeWageComputation(String company ,int wagePerHour,int workingDays,int workingHours){
+		this.company=company;
+		this.wagePerHour=wagePerHour;
+		this.workingDays=workingDays;
+		this.workingHours=workingHours;
+	}
+
+	//Calculating monthly wage of employee
+	public void employeeMonthlyWage(){
+		//variables
+		int empHours=0;
+		int totalWorkingDays=0, totalEmpHours=0;
+		int empCheck=(int) Math.floor(Math.random() * 10) % 3;
+		while (totalEmpHours <= workingHours && totalWorkingDays < workingDays){
+                        totalWorkingDays++;
+			switch(empCheck){
+				case IS_PART_TIME:
+					empHours=8;
+					break;
+				case IS_FULL_TIME:
+					empHours=4;
+					break;
+				default:
+					empHours=0;
+			}
+		totalEmpHours += empHours;
 		}
-		System.out.println("Total working Hours: "+totalHours);
-		System.out.println(" Total Working days: "+totalWorkingDays);
-                totalWage=totalHours*WAGE_PER_HR;
-                System.out.println(" Total Wage is: "+totalWage);
-         }
+	System.out.println("total employee working hour - "+totalEmpHours);
+        System.out.println("total employee working days - "+totalWorkingDays);
+        totalEmpWage = totalEmpHours * wagePerHour;
+	}
+
+	public String toString(){
+        	return "Total employee wage for company : "+company+" is - "+totalEmpWage;
+	}
 
 	public static void main(String[] args){
-		System.out.println("This is Employee Wage Computation problem");
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter Company name: ");
-		String company = scan.next();
-		System.out.println("Enter Wage per hour: ");
-		int WAGE_PER_HR = scan.nextInt();
-		System.out .println("Enter Maximum working days in month: ");
-		int MAX_WORKING_DAYS = scan.nextInt();
-		System.out.println("Enter maximum working hours in month: ");
-		int MAX_WORKING_HOURS = scan.nextInt();
-		EmployeeWageComputation(company,WAGE_PER_HR,MAX_WORKING_DAYS,MAX_WORKING_HOURS);
+		System.out.println("Welcome to Employee Wage Computation");
+		//take user input for each company
+		EmployeeWageComputation tata = new EmployeeWageComputation("Tata",20,20,100);
+		EmployeeWageComputation reliance = new EmployeeWageComputation("Jio",10,25,150);
+		tata.employeeMonthlyWage();
+		System.out.println(tata);
+		reliance.employeeMonthlyWage();
+		System.out.println(reliance);
 	}
 }
+
